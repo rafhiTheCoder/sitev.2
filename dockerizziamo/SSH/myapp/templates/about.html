@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+ {% block title %}Home{% endblock %}
+
+{% block style %}
+
+  body {
+    overflow-x:hidden;
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    font-family:sans-serif;
+  }
+  .banner{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("{% static 'img/340793.jpg' %}");
+    background-size: cover;
+    background-position: center;
+  }
+    .container h1 {
+      font-size: 70px;
+      margin-top: 70pxpx;
+      color: #ffff;
+  }
+
+  .container p {
+      margin: 20px auto; /* Adjust the top and bottom margin */
+      font-weight: 100;
+      line-height: 25px;
+      color: #ffff;
+  }
+  
+
+  .wrapper{
+    max-width: 1160px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  }
+
+
+  .invisible-text {
+    visibility: hidden;
+    position: absolute;
+    padding-left: 10px;
+   
+    color: #fff;
+}
+
+.invisible-text a {
+  color: #fff; /* Set link color */
+  text-decoration: none; /* Add underline */
+}
+
+.invisible-text a:hover {
+  text-decoration: none; /* Remove underline on hover */
+  color:#fff; /* Change link color on hover */
+}
+
+.wrapper p:hover .invisible-text {
+    visibility: visible;
+}
+{% endblock%}
+
+{% block content%}
+<div class="wrapper">
+  <h1>Chi siamo?</h1>
+  <p>Bianchi Riccardo<span class="invisible-text"></span><span  class="invisible-text">riccardo.bianci@fermi.mo.it</span></p>
+  <p>Cracco Gabriele <span class="invisible-text"></span><span   class="invisible-text">gabriele.cracco@fermi.mo.it</span></p>
+  <p>Dall'Olio Simone <span class="invisible-text"></span><span  class="invisible-text">simone.dallolio@fermi.mo.it</span></p>
+  
+  <p>Iseppi Simone <span class="invisible-text"></span><span   class="invisible-text">simone.iseppi@fermi.mo.it</span></p>
+  <p>Milelli Giada <span class="invisible-text"></span><span  class="invisible-text">giada.milelli@fermi.mo.it</span></p>
+  <p>Sisca Raffaele <span class="invisible-text"></span><span class="invisible-text">raffaele.sisca@fermi.mo.it</span></p>
+  <p>Stafa Kjara <span class="invisible-text"></span><span class="invisible-text">kjara.stafa@fermi.mo.it</span></p>
+  
+  
+  
+  
+  
+</div>
+  
+{% endblock%} 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        .button-like-link {
+            background: none;
+            border: none;
+            padding: 8px 8px 6px 16px;
+            font: inherit;
+            text-decoration: underline;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff; /* Fixed color code to #fff */
+            text-transform: uppercase;
+            list-style: none;
+            display: inline-block;
+        }
+
+        .button-like-link::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transition: 0.5s;
+        }
+
+        .button-like-link:hover::after {
+            width: 100%;
+        }
+
+        .button-like-link:focus {
+            outline: none;
+        }
+
+        .navbar-custom {
+            width: 85%;
+            margin: auto;
+            padding: 35px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-custom h1 {
+            display: flex;
+            align-items: left;
+        }
+
+        .navbar-custom ul li {
+            list-style: none;
+            display: inline-block;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .navbar-custom ul li a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .navbar-custom ul li a::after {
+            content: '';
+            height: 3px;
+            width: 0;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transition: 0.5s;
+        }
+
+        .navbar-custom ul li a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: none;
+        }
+
+        .toggle-switch input {
+            margin-left: 10px;
+        }
+
+        .navbar-toggler-custom {
+            border-color: rgba(255, 255, 255, 0.1); /* Border color for the button */
+        }
+
+        .navbar-toggler-custom .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        {% block style %}
+        {% endblock %}
+    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+
+    <div class="banner">
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <a class="navbar-brand" href="#">Brand</a>
+            <button class="navbar-toggler navbar-toggler-custom" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    {% block dash %}
+                    {% endblock %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="button-like-link" type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboards</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/serre">Le tue serre</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Sign-up</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

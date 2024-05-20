@@ -1,0 +1,59 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+body {
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("{% static 'img/home-backR.jpg' %}");
+  background-size: cover;
+  background-position: center;
+}
+
+.banner h1 {
+  font-size: 70px;
+  color: #fff;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Ensure text is centered */
+}
+
+.banner p {
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.wrapper {
+  max-width: 1160px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+{% endblock %}
+
+{% block content %}
+
+  <h1>MONITORA LE TUE SERRE IDROPONICHE ANCHE <br> A DISTANZA</h1>
+  <p>Grazie alla nostra tecnologia e agli appositi sensori, potrai monitorare e gestire le tue serre idroponiche da qualsiasi luogo, garantendo il massimo controllo e ottimizzazione delle tue colture.</p>
+
+{% endblock %}

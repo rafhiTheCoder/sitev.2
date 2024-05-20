@@ -1,0 +1,244 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-y:hidden;
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("{% static 'img/dash-back.jpeg' %}");
+  background-size: cover;
+  background-position: center;
+}
+
+.responsive-iframeOne-container {
+  width: 100%;
+  height: 80vh; /* Ensure the container takes almost full viewport height */
+  display: flex;
+  align-items: flex-start; /* Align items to the start (left) */
+  justify-content: center;
+  flex-direction: column; /* Stack dropdown and iframe vertically */
+  padding: 0 10px; /* Add padding to prevent overflow */
+  box-sizing: border-box; /* Include padding in width and height calculations */
+}
+
+.dropdown-container {
+  margin-bottom: 15px; /* Add space between dropdown and iframe */
+  color: white; /* Make text color white */
+}
+
+.responsive-iframeOne {
+  width: 100%;
+  height: 100%;
+  max-width: 100%; /* Ensure iframe does not exceed 100% width */
+  max-height: 100%; /* Ensure iframe does not exceed 100% height */
+  border: 0;
+}
+
+.iframe-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two iframes per row */
+  grid-gap: 0px; /* Adjust the gap between iframes */
+  margin-bottom: 20px; /* Add some spacing between rows */
+}
+
+.responsive-iframe {
+  width: 100%; /* Make the iframe fill the container width */
+  height: 27.5vh; /* Set height to 28% of viewport height */
+}
+
+.hidden {
+  display: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  margin-right: 10px;
+  background-color: #ccc;
+  border-radius: 20px;
+  top: 4px;
+}
+
+/* Style for the switch handle */
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  top: 1px;
+  left: 1px;
+  transition: 0.3s;
+}
+
+/* Move the switch handle to the right for the checked state */
+#myCheckbox:checked + .button-like-link .switch::after {
+  transform: translateX(20px);
+}
+
+/* Spinner styles */
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner div {
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 50%;
+  background: #fff;
+  animation: bounce 1.2s infinite ease-in-out both;
+}
+
+.spinner div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.spinner div:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+{% endblock %}
+
+{% block dash %}
+<li>
+  <!-- Hidden checkbox -->
+  <input type="checkbox" id="myCheckbox" class="form-check-input" onchange="toggleDashboard()" style="display: none; top:8px">
+  <!-- Switch label -->
+  <label for="myCheckbox" class="button-like-link mb-0" >
+      <!-- Switch handle -->
+      <span class="switch"></span>
+      Multi
+  </label>
+</li>
+{% endblock %}
+
+{% block content %}
+<!-- Loading spinner -->
+<div id="loading-spinner" class="spinner">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<!--  case 1-->
+<div class="iframe-container hidden">
+  <iframe class="responsive-iframe" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=temp&from=1715608614402&to=1716213414402&panel&panelId=2" frameborder="0" onload="iframeLoaded()"></iframe>
+  <iframe class="responsive-iframe" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=WaterLvl&from=1715608614402&to=1716213414402&&panelId=5" frameborder="0" onload="iframeLoaded()"></iframe>
+  <iframe class="responsive-iframe" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=ph&from=1715608614402&to=1716213414402&panelId=3" frameborder="0" onload="iframeLoaded()"></iframe>
+  <iframe class="responsive-iframe" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=torbid&from=1715608614402&to=1716213414402&panelId=4" frameborder="0" onload="iframeLoaded()"></iframe>
+  <iframe class="responsive-iframe" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=durezza&from=1715608614402&to=1716213414402&panelId=1" frameborder="0" onload="iframeLoaded()"></iframe>
+</div>
+
+<!-- case 2-->
+<div class="responsive-iframeOne-container hidden">
+<li>
+  <div class="dropdown-container">
+    <label for="misurazione-select">Scegli quale grafico guardare</label>
+    <select id="misurazione-select" onchange="updateIframe()">
+      <option value="temp">Temperatura</option>
+      <option value="WaterLvl">Livello Acqua</option>
+      <option value="durezza">Durezza</option>
+      <option value="torbid">Torbidità</option>
+      <option value="ph">pH</option>
+    </select>
+  </div>
+</li>
+  
+  <iframe class="responsive-iframeOne" id="responsive-iframeOne" src="https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=temp&from=1715608614402&to=1716213414402&panelId=6" frameborder="0" onload="iframeLoaded()"></iframe>
+</div>
+
+<script>
+function updateIframe() {
+  var select = document.getElementById("misurazione-select");
+  var iframe = document.getElementById("responsive-iframeOne");
+  var selectedValue = select.value;
+  iframe.src = `https://grafana.agritechnextgeneration.it/d-solo/cdm6kc5mr1ts0f/dash?orgId=1&var-var={{ var }}&var-var1={{ var1 }}&var-var2={{ var2 }}&var-var3={{ var3 }}&var-var4={{ var4 }}&var-var5={{ var5 }}&var-var6={{ var6 }}&var-var7={{ var7 }}&var-var8={{ var8 }}&var-var9={{ var9 }}&var-misura=${selectedValue}&from=1715608614402&to=1716213414402&panelId=6`;
+}
+
+let iframesLoaded = 0;
+const totalIframes = 6; // Update this number if the total number of iframes changes
+
+function iframeLoaded() {
+  iframesLoaded++;
+  if (iframesLoaded === totalIframes) {
+    document.getElementById('loading-spinner').style.display = 'none';
+    document.querySelector('.iframe-container').classList.remove('hidden');
+    document.querySelector('.responsive-iframeOne-container').classList.remove('hidden');
+    setInitialCheckboxState();
+  }
+}
+
+// Function to toggle dashboard visibility
+function toggleDashboard() {
+  var toggleState = document.getElementById("myCheckbox").checked;
+  var iframeContainer = document.querySelector(".iframe-container");
+  var responsiveIframeContainer = document.querySelector(".responsive-iframeOne-container");
+
+  // Save the state to localStorage
+  localStorage.setItem('dashboardToggleState', toggleState);
+  console.log("Toggle state:", toggleState);
+
+  if (toggleState) {
+    // Show iframeContainer and hide responsiveIframeContainer
+    iframeContainer.classList.remove("hidden");
+    responsiveIframeContainer.classList.add("hidden");
+  } else {
+    // Show responsiveIframeContainer and hide iframeContainer
+    iframeContainer.classList.add("hidden");
+    responsiveIframeContainer.classList.remove("hidden");
+  }
+}
+
+// Function to set the initial state of the checkbox when the DOM content is loaded
+document.addEventListener("DOMContentLoaded", function() {
+  setInitialCheckboxState();
+});
+
+// Function to set the initial state of the checkbox
+function setInitialCheckboxState() {
+  var savedState = localStorage.getItem('dashboardToggleState');
+  console.log("Saved state:", savedState); // Add this line to log savedState
+  var checkbox = document.getElementById("myCheckbox");
+
+  // If a state is saved, apply it
+  if (savedState !== null) {
+    checkbox.checked = savedState === 'true';
+    toggleDashboard(); // Apply the default state
+  } else {
+    // If no state is saved, default to hiding the dashboard
+    checkbox.checked = false;
+  }
+}
+</script>
+{% endblock %}

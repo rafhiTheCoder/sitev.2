@@ -1,0 +1,101 @@
+{% extends "main/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  min-height: 100vh; /* Ensures the body covers at least the viewport height */
+  background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("{% static 'img/serre-bac.png' %}") no-repeat center center fixed;
+  background-size: cover;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.banner {
+  width: 100%;
+  height: 100vh; /* Keep this if you want the initial banner to cover the viewport height */
+}
+
+.wrapper {
+  max-width: 1160px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-top: 10px; /* Ensures 10px space between wrappers */
+}
+
+.button-like-linkk {
+  background: none;
+  border: none;
+  padding: 8px 8px 6px 8px;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  list-style: none;
+  display: inline-block;
+  position: relative;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background color on hover */
+
+}
+
+.button-like-linkk:hover {
+  color:red; /* Change text color on hover */
+  background-color: rgba(255, 255, 255, 0.2); /* Add a subtle background color on hover */
+}
+
+.button-like-linkk:focus {
+  outline: none;
+}
+
+.form-container {
+  width: 90%; /* Set the width of the form container to 90% of the viewport width */
+  max-width: 500px; /* Set maximum width of the form container */
+  
+}
+
+.form-group  {
+  color: #ffff !important; /* Set the color of the help text to white */
+}
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  
+    <form method="post" action="/serre/">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" name="save" class="btn btn-primary">Aggiungi</button>
+    </form>
+  </div>
+
+    {% for s in user.serra.all %}
+    <div class="wrapper">
+      <p>{{ s.code }}</p>
+      <form action="{% url 'delete_serra' serra_id=s.pk %}" method="post">
+        {% csrf_token %}
+        
+        <button class="button-like-linkk" type="submit">Delete</button>
+        
+        
+      </form>
+    </div>
+    {% endfor %}
+  
+
+{% endblock %}
